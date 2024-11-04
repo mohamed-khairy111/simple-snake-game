@@ -1,4 +1,6 @@
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 using namespace std;
 
@@ -28,6 +30,34 @@ void Setup()
 }
 void Draw()
 {
+    cout << "\033c"; // Clear screen using escape code
+
+    for (int i = 0; i < width + 2; i++)
+    {
+        cout << "#";
+    }
+    cout << endl;
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            if (j == 0)
+                cout << "#";
+
+            cout << " ";
+
+            if (j == width - 1)
+            {
+                cout << "#";
+            }
+        }
+        cout << "\n";
+    }
+    for (int i = 0; i < width + 2; i++)
+    {
+        cout << "#";
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // 100 ms delay
 }
 void Input()
 {
