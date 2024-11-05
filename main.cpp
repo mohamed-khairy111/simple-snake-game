@@ -2,7 +2,8 @@
 #include <chrono>
 #include <thread>
 #include <conio.h>
-
+#include <time.h>
+#include <windows.h>
 using namespace std;
 
 bool gameOver;
@@ -21,6 +22,7 @@ eDirection dir;
 
 void Setup()
 {
+    srand(time(NULL));
     gameOver = false;
     dir = STOP;
     x = width / 2;
@@ -29,15 +31,15 @@ void Setup()
     fruitY = rand() % height;
     score = 0;
 }
+
 void Draw()
 {
     system("cls");
 
     for (int i = 0; i < width + 2; i++)
-    {
         cout << "#";
-    }
     cout << endl;
+
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
@@ -53,17 +55,16 @@ void Draw()
                 cout << " ";
 
             if (j == width - 1)
-            {
                 cout << "#";
-            }
         }
         cout << "\n";
     }
+
     for (int i = 0; i < width + 2; i++)
-    {
         cout << "#";
-    }
+    cout << "\n";
 }
+
 void Input()
 {
     if (_kbhit())
@@ -85,24 +86,27 @@ void Input()
         case 'x':
             gameOver = true;
             break;
+        default:
+            break;
         }
     }
 }
+
 void Logic()
 {
     switch (dir)
     {
     case LEFT:
-        x++;
-        break;
-    case RIGHT:
         x--;
         break;
+    case RIGHT:
+        x++;
+        break;
     case UP:
-        y++;
+        y--;
         break;
     case DOWN:
-        y--;
+        y++;
         break;
     default:
         break;
@@ -117,7 +121,9 @@ int main()
         Draw();
         Input();
         Logic();
-    }
 
+        // Slow down loop to make movement visible
+        Sleep(40);
+    }
     return 0;
 }
