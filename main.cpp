@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <conio.h>
 
 using namespace std;
 
@@ -12,7 +13,7 @@ enum eDirection
 {
     STOP = 0,
     LEFT,
-    Right,
+    RIGHT,
     UP,
     DOWN
 };
@@ -66,6 +67,27 @@ void Draw()
 }
 void Input()
 {
+    if (_kbhit())
+    {
+        switch (getch())
+        {
+        case 'a':
+            dir = LEFT;
+            break;
+        case 'd':
+            dir = RIGHT;
+            break;
+        case 'w':
+            dir = UP;
+            break;
+        case 's':
+            dir = DOWN;
+            break;
+        case 'x':
+            gameOver = true;
+            break;
+        }
+    }
 }
 void Logic()
 {
