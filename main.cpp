@@ -31,7 +31,7 @@ void Setup()
 }
 void Draw()
 {
-    cout << "\033c"; // Clear screen using escape code
+    system("cls");
 
     for (int i = 0; i < width + 2; i++)
     {
@@ -63,13 +63,12 @@ void Draw()
     {
         cout << "#";
     }
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000)); // 100 ms delay
 }
 void Input()
 {
     if (_kbhit())
     {
-        switch (getch())
+        switch (_getch())
         {
         case 'a':
             dir = LEFT;
@@ -91,6 +90,23 @@ void Input()
 }
 void Logic()
 {
+    switch (dir)
+    {
+    case LEFT:
+        x++;
+        break;
+    case RIGHT:
+        x--;
+        break;
+    case UP:
+        y++;
+        break;
+    case DOWN:
+        y--;
+        break;
+    default:
+        break;
+    }
 }
 
 int main()
