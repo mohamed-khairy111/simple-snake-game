@@ -181,7 +181,7 @@ int main()
         Input();
         Logic();
 
-        // Slow down loop to make movement visible
+        // Slow down loop to make movement visible .......
         Sleep(40);
 
         if (dir == UP || dir == DOWN)
